@@ -1,0 +1,257 @@
+# Boop! v1.0 listing, built from ASO.md (measured with applyra, 2026-10-06/07) on 2026-10-07.
+# Descriptions translated from ASO.md's en-US text using each locale's in-app names (lib/l10n/app_*.arb).
+# Push: asc.py listing push com.ouadieZerhouni.boop --file ASO/listing.yaml [--dry-run|--yes]
+app: Boop! Squishy Snoot Pets
+bundle_id: com.ouadieZerhouni.boop
+version: '1.0'
+version_state: PREPARE_FOR_SUBMISSION
+locales:
+  en-US:
+    name: Boop! Squishy Snoot Pets
+    subtitle: Cute Kawaii Animal Tap Game
+    keywords: satisfying,antistress,relaxing,games,fidget,stress,relief,calm,cozy,nose,critter,collect,adorable
+    promotionalText: Twelve squishy critters are waiting for a boop. Tap the snoot, chain combos, keep your daily streak. No ads, no purchases, just happy little noses.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      Boop the snoot!
+
+      Boop! is the tiniest, happiest game on your phone. Tap a squishy little critter right on the nose and watch it giggle, wobble and blush. Keep booping to build combos, make it sneeze, and fill your daily boop ring.
+
+      TWELVE CRITTERS TO BEFRIEND
+      Start with Mochi the bunny and unlock new friends as your boops add up: a chick, a panda, a frog, a baby hippo, a cloud lamb, a seal, a hamster, a puppy, a jellyfish, a leaf sprite, and one very rare baby dragon. Every critter has its own colours and its own little squeak.
+
+      HOW TO PLAY
+      • Boop the nose: every boop counts
+      • Chain boops for a Boop-a-doop, a Snoot Storm or a MEGA BOOP
+      • Hold to give a hug, drag to squish
+      • Hit your daily goal to keep your streak going
+      • Try Boop Rush: 30 seconds, nine bushes, as many snoots as you can. But let the sleepy ones nap!
+
+      MADE TO FEEL GOOD
+      • No ads. No purchases. No account.
+      • Works offline
+      • Soft sounds and gentle haptics (both can be switched off)
+      • Reduce Motion support for a calmer screen
+      • Available in English, العربية, Deutsch, Español, Français, 日本語 and Português
+
+      A perfect little break: boop for ten seconds or ten minutes, and come back tomorrow for your streak.
+  en-GB:
+    name: Boop! Squishy Snoot Pets
+    subtitle: Kawaii Critters to Poke & Hug
+    keywords: cute,animals,pet,virtual,tap,bunny,panda,dragon,hippo,jelly,mochi,fidget,relax,satisfying,games
+    promotionalText: Twelve squishy critters are waiting for a boop. Tap the snoot, chain combos, keep your daily streak. No ads, no purchases, just happy little noses.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      Boop the snoot!
+
+      Boop! is the tiniest, happiest game on your phone. Tap a squishy little critter right on the nose and watch it giggle, wobble and blush. Keep booping to build combos, make it sneeze, and fill your daily boop ring.
+
+      TWELVE CRITTERS TO BEFRIEND
+      Start with Mochi the bunny and unlock new friends as your boops add up: a chick, a panda, a frog, a baby hippo, a cloud lamb, a seal, a hamster, a puppy, a jellyfish, a leaf sprite, and one very rare baby dragon. Every critter has its own colours and its own little squeak.
+
+      HOW TO PLAY
+      • Boop the nose: every boop counts
+      • Chain boops for a Boop-a-doop, a Snoot Storm or a MEGA BOOP
+      • Hold to give a hug, drag to squish
+      • Hit your daily goal to keep your streak going
+      • Try Boop Rush: 30 seconds, nine bushes, as many snoots as you can. But let the sleepy ones nap!
+
+      MADE TO FEEL GOOD
+      • No ads. No purchases. No account.
+      • Works offline
+      • Soft sounds and gentle haptics (both can be switched off)
+      • Reduce Motion support for a calmer screen
+      • Available in English, العربية, Deutsch, Español, Français, 日本語 and Português
+
+      A perfect little break: boop for ten seconds or ten minutes, and come back tomorrow for your streak.
+  ar-SA:
+    name: Boop! حيوانات كيوت
+    subtitle: لعبة حيوانات لطيفة للتسلية
+    # ASO.md had "كيوت" here too; the name already carries it, so it was a wasted repeat.
+    keywords: بوب,العاب,استرخاء,توتر,ضغط,ناعم,دبدوب,باندا,ارنب,تنين,جمع,هادئة,مريحة,فيدجت,squishy,kawaii
+    promotionalText: اثنا عشر حيوانًا لطيفًا بانتظار لمستك. المس الأنف الصغير، اصنع كومبو، وحافظ على سلسلتك اليومية. بلا إعلانات ولا مشتريات، فقط أنوف صغيرة سعيدة.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      المس الأنف الصغير!
+
+      Boop! هي أصغر وأسعد لعبة على هاتفك. المس أنف حيوان صغير وطري وشاهده يضحك ويتمايل ويحمرّ خجلًا. واصل اللمس لتصنع كومبو، واجعله يعطس، واملأ حلقة البوب اليومية.
+
+      اثنا عشر صديقًا بانتظارك
+      ابدأ مع موتشي الأرنب، وتعرّف على أصدقاء جدد كلما زادت بوباتك: كتكوت، وباندا، وضفدع، وفرس نهر صغير، وخروف من الغيم، وفقمة، وهامستر، وجرو، وقنديل بحر، وروح ورقة شجر، وتنين صغير نادر جدًا. لكل صديق ألوانه الخاصة وصوته الصغير الخاص.
+
+      طريقة اللعب
+      • المس الأنف: كل بوب يُحتسب
+      • اصنع سلسلة لمسات لتحصل على «بوب-آ-دوب!» و«عاصفة البوب!» و«بوب خارق!»
+      • اضغط مطولًا لتعانقه، واسحب لتعصره
+      • حقق هدفك اليومي لتحافظ على سلسلتك
+      • جرّب «سباق البوب»: ٣٠ ثانية، تسع شجيرات، وأكبر عدد ممكن من الأنوف. لكن دع النعسانين ينامون!
+
+      صُممت لتشعرك بالراحة
+      • بلا إعلانات. بلا مشتريات. بلا حساب.
+      • تعمل دون اتصال بالإنترنت
+      • أصوات ناعمة واهتزاز لطيف (يمكن إيقاف الاثنين)
+      • دعم «تقليل الحركة» لشاشة أهدأ
+      • متوفرة بالعربية، English، Deutsch، Español، Français، 日本語 وPortuguês
+
+      استراحة صغيرة مثالية: المس لعشر ثوانٍ أو لعشر دقائق، وعُد غدًا لتحافظ على سلسلتك.
+  de-DE:
+    name: Boop! Süße Knuddel-Tiere
+    subtitle: Kawaii Tierspiel zum Antippen
+    keywords: spiele,entspannung,antistress,stress,niedlich,haustier,virtuell,sammeln,fidget,nase,squishy,cute
+    promotionalText: Zwölf knuddelige Tierchen warten auf einen Stupser. Tippe auf die Nase, verkette Combos, halte deine Tagesserie. Keine Werbung, keine Käufe, nur fröhliche kleine Nasen.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      Stups die Nase!
+
+      Boop! ist das kleinste, fröhlichste Spiel auf deinem Handy. Tippe einem knuddeligen Tierchen direkt auf die Nase und sieh zu, wie es kichert, wackelt und rot wird. Stups weiter, um Combos aufzubauen, es zum Niesen zu bringen und deinen täglichen Boop-Ring zu füllen.
+
+      ZWÖLF TIERCHEN ZUM ANFREUNDEN
+      Du startest mit Mochi, dem Häschen, und triffst neue Freunde, je mehr Boops du sammelst: ein Küken, einen Panda, einen Frosch, ein Baby-Nilpferd, ein Wolkenlamm, eine Robbe, einen Hamster, einen Welpen, eine Qualle, einen Blattgeist und einen ganz seltenen Babydrachen. Jedes Tierchen hat eigene Farben und sein eigenes kleines Quietschen.
+
+      SO WIRD GESPIELT
+      • Stups die Nase: Jeder Boop zählt
+      • Verkette Boops zu Boop-a-doop, Stupser-Sturm oder MEGA-BOOP
+      • Gedrückt halten zum Knuddeln, ziehen zum Quetschen
+      • Erreiche dein Tagesziel und halte deine Serie
+      • Probier Boop Rush: 30 Sekunden, neun Büsche, so viele Nasen wie möglich. Aber lass die müden schlafen!
+
+      ZUM WOHLFÜHLEN GEMACHT
+      • Keine Werbung. Keine Käufe. Kein Konto.
+      • Funktioniert offline
+      • Sanfte Töne und dezente Vibration (beides abschaltbar)
+      • Unterstützt „Bewegung reduzieren“ für einen ruhigeren Bildschirm
+      • Verfügbar auf Deutsch, English, العربية, Español, Français, 日本語 und Português
+
+      Die perfekte kleine Pause: Stups zehn Sekunden oder zehn Minuten lang und komm morgen für deine Serie wieder.
+  es-MX:
+    name: Boop! Mascotas Adorables
+    subtitle: Juego kawaii de animalitos
+    keywords: mascota,virtual,lindos,juegos,tiernos,antiestres,relajante,squishy,fidget,nariz,coleccion,animales
+    promotionalText: Doce animalitos blanditos esperan un boop. Toca la naricita, encadena combos y mantén tu racha diaria. Sin anuncios ni compras, solo naricitas felices.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: &es |-
+      ¡Haz boop en la naricita!
+
+      Boop! es el juego más pequeño y feliz de tu teléfono. Toca la nariz de un animalito blandito y míralo reír, tambalearse y sonrojarse. Sigue haciendo boop para encadenar combos, hacerlo estornudar y llenar tu anillo diario de boops.
+
+      DOCE AMIGUITOS POR CONOCER
+      Empieza con Mochi, la conejita, y conoce nuevos amigos a medida que sumas boops: un pollito, un panda, una rana, un hipopótamo bebé, una ovejita de nube, una foca, un hámster, un cachorrito, una medusa, un espíritu de hoja y un dragón bebé muy raro. Cada animalito tiene sus propios colores y su propio chillido.
+
+      CÓMO SE JUEGA
+      • Toca la nariz: cada boop cuenta
+      • Encadena boops para un Boop-a-doop, una Tormenta de boops o un MEGA BOOP
+      • Mantén pulsado para abrazar, arrastra para apachurrar
+      • Cumple tu meta diaria para mantener tu racha
+      • Prueba Boop Rush: 30 segundos, nueve arbustos y todas las naricitas que puedas. ¡Pero deja dormir a los dormilones!
+
+      HECHO PARA SENTIRTE BIEN
+      • Sin anuncios. Sin compras. Sin cuenta.
+      • Funciona sin conexión
+      • Sonidos suaves y vibración delicada (ambos se pueden desactivar)
+      • Compatible con Reducir movimiento para una pantalla más tranquila
+      • Disponible en Español, English, العربية, Deutsch, Français, 日本語 y Português
+
+      Un descanso perfecto: haz boop diez segundos o diez minutos, y vuelve mañana por tu racha.
+  es-ES:
+    name: Boop! Mascotas Adorables
+    subtitle: Juego kawaii de animalitos
+    keywords: mascota,virtual,lindos,juegos,tiernos,antiestres,relajante,squishy,fidget,nariz,coleccion,animales
+    promotionalText: Doce animalitos blanditos esperan un boop. Toca la naricita, encadena combos y mantén tu racha diaria. Sin anuncios ni compras, solo naricitas felices.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: *es
+  fr-FR:
+    name: Boop! Animaux Trop Mignons
+    subtitle: Jeu kawaii anti-stress
+    keywords: jeux,mignon,relaxant,antistress,stress,animal,virtuel,compagnon,collection,squishy,fidget,nez,calme
+    promotionalText: Douze petites bêtes toutes douces attendent un boop. Touche le museau, enchaîne les combos, garde ta série du jour. Sans pub ni achats, juste des petits nez heureux.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      Fais boop sur le museau !
+
+      Boop! est le plus petit et le plus joyeux des jeux sur ton téléphone. Touche le nez d'une petite bête toute douce et regarde-la glousser, se dandiner et rougir. Continue pour enchaîner les combos, la faire éternuer et remplir ton anneau de boops du jour.
+
+      DOUZE PETITS AMIS À RENCONTRER
+      Commence avec Mochi le lapin et rencontre de nouveaux amis au fil de tes boops : un poussin, un panda, une grenouille, un bébé hippo, un agneau-nuage, un phoque, un hamster, un chiot, une méduse, un esprit-feuille, et un bébé dragon très rare. Chaque petite bête a ses propres couleurs et son propre petit couinement.
+
+      COMMENT JOUER
+      • Touche le nez : chaque boop compte
+      • Enchaîne les boops pour un Boop-a-doop, une Tempête de boops ou un MÉGA BOOP
+      • Maintiens pour un câlin, glisse pour écraser tout doux
+      • Atteins ton objectif du jour pour garder ta série
+      • Essaie Boop Rush : 30 secondes, neuf buissons, un maximum de museaux. Mais laisse dormir les endormis !
+
+      FAIT POUR TE FAIRE DU BIEN
+      • Sans pub. Sans achats. Sans compte.
+      • Fonctionne hors ligne
+      • Sons doux et vibrations légères (désactivables)
+      • Compatible avec Réduire les animations pour un écran plus calme
+      • Disponible en Français, English, العربية, Deutsch, Español, 日本語 et Português
+
+      La petite pause parfaite : boope dix secondes ou dix minutes, et reviens demain pour ta série.
+  ja:
+    name: Boop! ぷにぷに鼻タッチ
+    subtitle: 癒しのかわいい動物ゲーム
+    keywords: 癒し系,ペット,育成,暇つぶし,ストレス解消,もちもち,ふわふわ,コレクション,カワイイ,もふもふ,タップ,スクイーズ,癒やし,うさぎ,パンダ,ドラゴン,クラゲ,ゆるかわ,つんつん,ミニゲーム
+    promotionalText: ぷにぷにの動物たち12匹があなたのブープを待っています。鼻をタップしてコンボをつなげ、毎日の連続記録をキープ。広告なし・課金なし、しあわせな小さな鼻だけ。
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      鼻をブープ！
+
+      Boop!は、あなたのスマホでいちばん小さくて、いちばんしあわせなゲーム。ぷにぷにの動物の鼻をタップすると、くすくす笑って、ぷるぷる揺れて、ほっぺが赤くなります。ブープを続けてコンボをつなげ、くしゃみをさせて、毎日のブープリングを満たしましょう。
+
+      なかよくなれる12匹
+      はじめはうさぎのモチ。ブープが増えるたびに新しい友だちに会えます：ひよこ、パンダ、カエル、赤ちゃんカバ、くもヒツジ、アザラシ、ハムスター、子犬、クラゲ、葉っぱの妖精、そしてとてもレアな赤ちゃんドラゴン。どの子にも自分だけの色と鳴き声があります。
+
+      あそびかた
+      • 鼻をタップ：ブープはぜんぶカウント
+      • ブープをつなげて「ブーパドゥー！」「ブープの嵐！」「メガブープ！」
+      • 長押しでハグ、ドラッグでむにゅっと
+      • 毎日の目標を達成して連続記録をキープ
+      • ブープラッシュに挑戦：30秒、9つのしげみ、できるだけたくさんの鼻を。でも眠い子は寝かせてあげて！
+
+      気持ちよく遊べるように
+      • 広告なし。課金なし。アカウント不要。
+      • オフラインで遊べます
+      • やさしいサウンドと控えめな振動（どちらもオフにできます）
+      • 「視差効果を減らす」に対応した落ち着いた画面
+      • 日本語、English、العربية、Deutsch、Español、Français、Português に対応
+
+      ちょっとした息抜きにぴったり。10秒でも10分でもブープして、明日も連続記録のために戻ってきてね。
+  pt-BR:
+    name: Boop! Bichinhos Fofos
+    subtitle: Bichinho virtual kawaii
+    keywords: jogos,fofinhos,animais,antiestresse,relaxante,squishy,fidget,nariz,colecao,mascote,pet,calmo,jogo
+    promotionalText: Doze bichinhos fofinhos esperam um boop. Toque no narizinho, encadeie combos e mantenha sua sequência diária. Sem anúncios, sem compras, só narizinhos felizes.
+    privacyPolicyUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+    supportUrl: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+    description: |-
+      Faça boop no narizinho!
+
+      Boop! é o jogo mais pequenininho e feliz do seu celular. Toque no nariz de um bichinho fofinho e veja ele rir, balançar e ficar corado. Continue fazendo boop para encadear combos, fazer ele espirrar e encher seu anel diário de boops.
+
+      DOZE AMIGUINHOS PARA CONHECER
+      Comece com a Mochi, a coelhinha, e conheça novos amigos conforme seus boops aumentam: um pintinho, um panda, um sapo, um hipopótamo bebê, uma ovelhinha de nuvem, uma foca, um hamster, um filhote de cachorro, uma água-viva, um espírito de folha e um dragão bebê muito raro. Cada bichinho tem suas próprias cores e seu próprio guinchinho.
+
+      COMO JOGAR
+      • Toque no nariz: cada boop conta
+      • Encadeie boops para um Boop-a-doop, uma Tempestade de boops ou um MEGA BOOP
+      • Segure para abraçar, arraste para apertar
+      • Cumpra sua meta diária para manter sua sequência
+      • Experimente o Boop Rush: 30 segundos, nove arbustos e o máximo de narizinhos que conseguir. Mas deixe os sonolentos dormirem!
+
+      FEITO PARA FAZER BEM
+      • Sem anúncios. Sem compras. Sem conta.
+      • Funciona offline
+      • Sons suaves e vibração delicada (os dois podem ser desligados)
+      • Compatível com Reduzir movimento para uma tela mais calma
+      • Disponível em Português, English, العربية, Deutsch, Español, Français e 日本語
+
+      Uma pausa perfeita: faça boop por dez segundos ou dez minutos, e volte amanhã pela sua sequência.
