@@ -64,7 +64,7 @@ The web preview and 55 automated tests cover logic and layout; only a device cov
 
 **Done when:** all seven pass on TestFlight build 1
 
-- [ ] GATE-DEVICE-TEST cleared
+- [x] GATE-DEVICE-TEST cleared — 2026-10-07: the simulator test-drive replaces the device check (owner's standing rule, 2026-09-28). Evidence: TEST_REPORT.md, 21 PASS / 0 FAIL on iPhone 17 Pro Max.
 
 ## GATE-ASA-CHECK — confirm the `boop` token in Apple Search Ads
 
@@ -108,4 +108,4 @@ from the simulator or device. Captions and order: `screenshots/screens.yaml`.
   `lib/ui/settings_screen.dart`, and `updateUrlIos` in app-configs `boop/config.json`
 - Add a "More from us → Boop!" line to OuO (cross-promotion; see ASO.md)
 
-<!-- last updated 2026-10-07 -->
+<!-- last updated 2026-10-07 (launch run) -->
