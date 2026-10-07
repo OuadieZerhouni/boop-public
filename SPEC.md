@@ -76,13 +76,13 @@ squeak plays (pitched per critter), the phone ticks a light haptic, and a heart
 or "+1" floats from the tap point.
 
 **Acceptance criteria**
-- [ ] A tap inside the nose hit-area increments the session and lifetime boop counters by exactly 1.
-- [ ] A tap on the body outside the nose does **not** count. It triggers a wobble and a giggle instead.
-- [ ] Dragging on the body stretches it toward the finger; releasing springs it back.
-- [ ] Holding 0.6 s or longer is a **hug**: eyes close and hearts stream for as long as the finger is down. It does not count as a boop.
-- [ ] **Idle** behavior: the critter breathes, blinks at random 2–5 s intervals, and after 30 s without input gets sleepy (half-lidded, "z z z"). The next touch wakes it.
-- [ ] Sound and haptics obey Settings. With both off, a boop is silent and still.
-- [ ] Every interactive element has a Semantics label. The critter announces "<name>. Double-tap to boop."
+- [x] A tap inside the nose hit-area increments the session and lifetime boop counters by exactly 1.
+- [x] A tap on the body outside the nose does **not** count. It triggers a wobble and a giggle instead.
+- [x] Dragging on the body stretches it toward the finger; releasing springs it back.
+- [x] Holding 0.6 s or longer is a **hug**: eyes close and hearts stream for as long as the finger is down. It does not count as a boop.
+- [x] **Idle** behavior: the critter breathes, blinks at random 2–5 s intervals, and after 30 s without input gets sleepy (half-lidded, "z z z"). The next touch wakes it.
+- [x] Sound and haptics obey Settings. With both off, a boop is silent and still.
+- [x] Every interactive element has a Semantics label. The critter announces "<name>. Double-tap to boop."
 
 ### F2 — Boop combos
 
@@ -90,10 +90,10 @@ Boops less than 1.0 s apart chain into a combo. A pill above the critter shows
 the count. Each boop in a combo raises the squeak's pitch slightly, capped.
 
 **Acceptance criteria**
-- [ ] Two boops within 1.0 s make combo 2; a gap of more than 1.0 s resets it to 1 on the next boop.
-- [ ] At combo **10, 25 and 50** a tier banner pops ("Boop-a-doop!", "Snoot storm!", "Mega boop!") with a chime and a medium haptic.
-- [ ] Every 30th boop in a combo makes the critter sneeze ("achoo!") with confetti.
-- [ ] The best combo ever is saved and shown on the Critters screen.
+- [x] Two boops within 1.0 s make combo 2; a gap of more than 1.0 s resets it to 1 on the next boop.
+- [x] At combo **10, 25 and 50** a tier banner pops ("Boop-a-doop!", "Snoot storm!", "Mega boop!") with a chime and a medium haptic.
+- [x] Every 30th boop in a combo makes the critter sneeze ("achoo!") with confetti.
+- [x] The best combo ever is saved and shown on the Critters screen.
 
 ### F3 — Collection: twelve critters
 
@@ -117,13 +117,13 @@ Pip!") with **Boop them!** and **Later** buttons.
 | 12 | Star (baby dragon) | 3000 |
 
 **Acceptance criteria**
-- [ ] Crossing a threshold unlocks exactly that critter once and shows the celebration once, even across restarts.
-- [ ] The Critters tab shows all twelve cards:
+- [x] Crossing a threshold unlocks exactly that critter once and shows the celebration once, even across restarts.
+- [x] The Critters tab shows all twelve cards:
   - unlocked: the colored critter, its name and its boop count;
   - locked: a silhouette, "???" and "N more boops".
-- [ ] Tapping an unlocked card selects it, saves the choice and switches to the Boop tab with it. Tapping a locked card shows how many boops remain.
-- [ ] Each critter has its own colors, ears, nose shape and squeak pitch. No two look alike.
-- [ ] A progress bar shows "Next friend in N boops", or "Everyone's here!" when all twelve are unlocked.
+- [x] Tapping an unlocked card selects it, saves the choice and switches to the Boop tab with it. Tapping a locked card shows how many boops remain.
+- [x] Each critter has its own colors, ears, nose shape and squeak pitch. No two look alike.
+- [x] A progress bar shows "Next friend in N boops", or "Everyone's here!" when all twelve are unlocked.
 
 ### F4 — Daily boops & streak
 
@@ -132,9 +132,9 @@ around the boop counter. Meeting it marks the day done; consecutive days build a
 streak, shown with a small flame.
 
 **Acceptance criteria**
-- [ ] The ring fills with today's boops and completes at the goal. Reaching it shows "Daily boops done!" once per day.
-- [ ] The streak increments when the goal is met on consecutive local calendar days. It resets to 0 if a whole day passes unmet. Meeting the goal again the same day changes nothing.
-- [ ] Day boundaries use local time and are testable with an injected clock.
+- [x] The ring fills with today's boops and completes at the goal. Reaching it shows "Daily boops done!" once per day.
+- [x] The streak increments when the goal is met on consecutive local calendar days. It resets to 0 if a whole day passes unmet. Meeting the goal again the same day changes nothing.
+- [x] Day boundaries use local time and are testable with an injected clock.
 
 ### F5 — Boop Rush (mini-game)
 
@@ -147,12 +147,12 @@ Pop-ups speed up over the round. The end screen shows score, best and new-best
 confetti, with **Play again**.
 
 **Acceptance criteria**
-- [ ] A round lasts exactly the configured duration (default 30 s, remote 15–60). The game cannot be scored after time is up.
-- [ ] Booping an awake critter scores +1, a golden one +5, and +1 more per 5-hit streak. Booping a sleepy one scores −2 (never below 0) and resets the streak.
-- [ ] A critter that is booped or times out leaves its bush. No bush ever shows two critters at once.
-- [ ] The best score persists. A new best is celebrated.
-- [ ] Rush boops also count toward lifetime boops, unlocks and the daily goal (awake critters only).
-- [ ] The Rush tab can be killed remotely (`features.rushEnabled`). When off, the tab shows a friendly "Rush is resting" message instead.
+- [x] A round lasts exactly the configured duration (default 30 s, remote 15–60). The game cannot be scored after time is up.
+- [x] Booping an awake critter scores +1, a golden one +5, and +1 more per 5-hit streak. Booping a sleepy one scores −2 (never below 0) and resets the streak.
+- [x] A critter that is booped or times out leaves its bush. No bush ever shows two critters at once.
+- [x] The best score persists. A new best is celebrated.
+- [x] Rush boops also count toward lifetime boops, unlocks and the daily goal (awake critters only).
+- [x] The Rush tab can be killed remotely (`features.rushEnabled`). When off, the tab shows a friendly "Rush is resting" message instead.
 
 ### F6 — Settings
 
@@ -161,10 +161,10 @@ Sound, Haptics, Reduce motion (also follows the iOS setting), Language (System +
 confirm dialog), and the app version.
 
 **Acceptance criteria**
-- [ ] Each toggle persists across restarts and takes effect immediately.
-- [ ] Reduce motion removes particles, confetti and the drag stretch, but keeps a simple scale pulse so a boop still reads.
-- [ ] Reset clears **every** saved key: boops, unlocks, streak, best scores, selected critter, celebration flags and onboarding. The app returns to the first-launch state.
-- [ ] A language override switches the UI immediately. Arabic lays out right-to-left.
+- [x] Each toggle persists across restarts and takes effect immediately.
+- [x] Reduce motion removes particles, confetti and the drag stretch, but keeps a simple scale pulse so a boop still reads.
+- [x] Reset clears **every** saved key: boops, unlocks, streak, best scores, selected critter, celebration flags and onboarding. The app returns to the first-launch state.
+- [x] A language override switches the UI immediately. Arabic lays out right-to-left.
 
 ### F7 — First run
 
@@ -188,8 +188,8 @@ at most once per 6 h, caches it, and falls back to code defaults.
 - privacy/support URLs
 
 **Acceptance criteria**
-- [ ] With no network, the app is fully functional on defaults. A malformed blob falls back without crashing (tested).
-- [ ] Values are clamped to their documented ranges.
+- [x] With no network, the app is fully functional on defaults. A malformed blob falls back without crashing (tested).
+- [x] Values are clamped to their documented ranges.
 
 ## Non-goals (v1)
 
