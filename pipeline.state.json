@@ -3,5 +3,10 @@
     "at": "2026-10-07T15:46:33",
     "done": true,
     "note": "release_local.py ship: 1.0.0 (1) uploaded 2026-10-07"
+  },
+  "submit": {
+    "at": "2026-10-07T15:50:46",
+    "done": true,
+    "note": "asc.py submit 1.0.0 (1), AFTER_APPROVAL, submission 404da80c, 2026-10-07"
   }
 }
