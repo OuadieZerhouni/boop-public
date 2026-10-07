@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/release
+
+# Screenshot pipeline output: reproducible from screenshots/screens.yaml with
+# one command, so the images are build artifacts, not sources.
+screenshots/raw/
+screenshots/out/
+screenshots/review.html

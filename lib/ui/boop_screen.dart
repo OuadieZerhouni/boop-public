@@ -44,12 +44,12 @@ class _BoopScreenState extends State<BoopScreen> with TickerProviderStateMixin {
     if (debugScene == Scene.combo) _playComboScene();
   }
 
-  /// Screenshot scene: 25 quick boops land as the capture fires (~4 s after
-  /// launch), so the "Snoot storm!" banner and the combo pill are both up.
+  /// Screenshot scene: 25 quick boops end just before the capture fires (~3 s
+  /// after launch), so a tier banner and the combo pill are both up.
   double _side = 0;
   void _playComboScene() {
     var n = 0;
-    Timer(const Duration(milliseconds: 2300), () {
+    Timer(const Duration(milliseconds: 1200), () {
       Timer.periodic(const Duration(milliseconds: 60), (t) {
         if (!mounted || n++ >= 25 || _side == 0) return t.cancel();
         final c = _s.progress.value.selected;

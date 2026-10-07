@@ -47,15 +47,18 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
     if (debugScene == Scene.rush) WidgetsBinding.instance.addPostFrameCallback((_) => mounted ? _start() : null);
   }
 
-  /// Screenshot scene: boops each awake critter once it is fully up.
-  void _botTap(RushGame g) {
-    final box = _gridKey.currentContext?.findRenderObject() as RenderBox?;
-    if (box == null) return;
-    final cell = box.size.width / 3;
-    for (var i = 0; i < 9; i++) {
-      final p = g.slots[i];
-      if (p == null || p.kind == PopKind.sleepy || _elapsed - p.bornAt < const Duration(milliseconds: 450)) continue;
-      _tap(i, Offset((i % 3 + 0.5) * cell, (i ~/ 3 + 0.35) * cell));
+  /// Screenshot scene: the round starts 9 s in, already bot-played, so the
+  /// capture (~3 s after launch) shows a busy meadow and a running score.
+  Duration _sceneHeadStart = Duration.zero;
+
+  void _playHeadStart(RushGame g) {
+    _sceneHeadStart = const Duration(seconds: 9);
+    for (var t = Duration.zero; t < _sceneHeadStart; t += const Duration(milliseconds: 50)) {
+      g.advance(t);
+      for (var i = 0; i < 9; i++) {
+        final p = g.slots[i];
+        if (p != null && p.kind != PopKind.sleepy && t - p.bornAt >= const Duration(milliseconds: 450)) g.tap(i, t);
+      }
     }
   }
 
@@ -76,6 +79,7 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
       duration: Duration(seconds: s.remote.value.rushDurationSec),
       seed: widget.seed ?? _rng.nextInt(1 << 30),
     );
+    if (debugScene == Scene.rush) _playHeadStart(_game!);
     _elapsed = Duration.zero;
     _lastTickSecond = -1;
     _boopedBy.clear();
@@ -91,9 +95,8 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
   void _onTick(Duration elapsed) {
     final g = _game;
     if (g == null) return;
-    _elapsed = elapsed;
-    g.advance(elapsed);
-    if (debugScene == Scene.rush) _botTap(g);
+    _elapsed = elapsed + _sceneHeadStart;
+    g.advance(_elapsed);
     final left = g.remaining.inSeconds;
     if (!g.isOver && left < 3 && left != _lastTickSecond && g.remaining.inMilliseconds % 1000 > 0) {
       _lastTickSecond = left;
