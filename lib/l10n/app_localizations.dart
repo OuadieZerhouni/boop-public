@@ -324,11 +324,11 @@ abstract class AppLocalizations {
   /// **'Best'**
   String get rushBest;
 
-  /// No description provided for @rushTime.
+  /// Rush countdown label
   ///
   /// In en, this message translates to:
-  /// **'Time'**
-  String get rushTime;
+  /// **'Time {seconds}s'**
+  String rushTime(int seconds);
 
   /// No description provided for @rushOver.
   ///

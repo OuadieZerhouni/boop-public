@@ -205,7 +205,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rushBest => 'الأفضل';
 
   @override
-  String get rushTime => 'الوقت';
+  String rushTime(int seconds) {
+    return 'الوقت $seconds ث';
+  }
 
   @override
   String get rushOver => 'انتهى الوقت!';

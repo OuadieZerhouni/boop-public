@@ -192,7 +192,7 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('${l.rushTime} ${((g?.remaining.inMilliseconds ?? s.remote.value.rushDurationSec * 1000) / 1000).ceil()}s',
+                          Text(l.rushTime(((g?.remaining.inMilliseconds ?? s.remote.value.rushDurationSec * 1000) / 1000).ceil()),
                               style: body(context, 14, weight: FontWeight.w800)),
                           const SizedBox(height: 4),
                           StickerProgress(value: g == null ? 1 : 1 - g.progress, color: (g != null && g.remaining.inSeconds < 5) ? BoopColors.heart : BoopColors.mint),
@@ -339,7 +339,7 @@ class _Bush extends StatelessWidget {
                         left: w * 0.08,
                         width: w * 0.84,
                         height: w * 0.84,
-                        top: w * 0.7 - rise * w * 0.62,
+                        top: w * 0.74 - rise * w * 0.9, // fully up: the whole face clears the bush
                         child: Semantics(
                           label: p.kind.name,
                           child: CustomPaint(

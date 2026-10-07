@@ -202,6 +202,37 @@ void main() {
     expect(find.byKey(const ValueKey('rush-start')), findsNothing);
   });
 
+  testWidgets('announcement and update banners: dismissible, except a required update (F8)', (tester) async {
+    await boot(tester);
+    services.remote.value = RemoteConfig.fromJson({
+      'latestVersion': '1.1.0',
+      'updateUrlIos': 'https://apps.apple.com/app/id1',
+      'announcement': {'enabled': true, 'id': 'hi-1', 'title': {'en': 'New critter soon!'}, 'body': 'Stay tuned'},
+    });
+    await tester.pumpAndSettle();
+    expect(find.text('New critter soon!'), findsOneWidget);
+    expect(find.text('A new version of Boop! is ready.'), findsOneWidget);
+    expect(find.byTooltip('Dismiss'), findsNWidgets(2));
+
+    await tester.tap(find.byTooltip('Dismiss').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Dismiss'));
+    await tester.pumpAndSettle();
+    expect(find.text('New critter soon!'), findsNothing);
+    expect(find.text('A new version of Boop! is ready.'), findsNothing);
+    expect(services.progress.value.dismissedAnnouncements, containsAll(['hi-1', 'update-1.1.0']));
+
+    // Below the minimum supported version the banner returns and cannot be closed.
+    services.remote.value = RemoteConfig.fromJson({
+      'minSupportedVersion': '2.0.0',
+      'latestVersion': '1.1.0',
+      'updateUrlIos': 'https://apps.apple.com/app/id1',
+    });
+    await tester.pumpAndSettle();
+    expect(find.text('A new version of Boop! is ready.'), findsOneWidget);
+    expect(find.byTooltip('Dismiss'), findsNothing);
+  });
+
   testWidgets('settings persist; Arabic switches the UI to RTL; reset is complete (F6)', (tester) async {
     await boot(tester);
     await boop(tester, times: 3);

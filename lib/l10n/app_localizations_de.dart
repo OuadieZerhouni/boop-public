@@ -186,7 +186,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get rushBest => 'Rekord';
 
   @override
-  String get rushTime => 'Zeit';
+  String rushTime(int seconds) {
+    return 'Zeit $seconds s';
+  }
 
   @override
   String get rushOver => 'Zeit ist um!';

@@ -1,33 +1,39 @@
-# GENERATED scaffold — edit freely, this one is yours.
-#
 # What the screenshot pipeline captures and how each slide is captioned.
-# `screenshots.py` drives the simulator to each screen, captures, composes with
-# the caption, resizes to Apple's required sizes, and verifies every output
-# dimension before showing you a review page.
+# Raw frames (1320x2868) can also be rendered on Windows:
+#   RENDER_SCREENS=1 flutter test test/tool_render_screens_test.dart  -> build/shots/
+# Rule from ASO.md: slide 1's caption contains the word "Boop".
 
-# Apple needs exactly two sizes uploaded; it derives the rest.
 sizes:
-  "6.9": [2868, 1320]   # iPhone 17 Pro Max class
-  "6.5": [2688, 1242]   # legacy required slot
+  "6.9": [2868, 1320]
+  "6.5": [2688, 1242]
 
-# Capture rules that keep a set looking deliberate rather than assembled:
-#   - one device, one orientation, one theme for the whole set
-#   - clean status bar (the pipeline overrides time and battery)
-#   - the subject centred and identical in scale across slides
 device: "iPhone 17 Pro Max"
-theme: dark
+theme: light
 status_bar: {time: "9:41", battery: 100, cellular: 4, wifi: 3}
 
 slides:
-  - id: hello
-    # How the pipeline reaches this screen. `launch` plus optional taps.
-    route: launch
+  - id: boop
+    route: launch            # played state: 640 boops, Bao selected (render: *_1_boop)
     caption:
-      en: "Meet your sprout"
-      ar: "تعرّف على براعمك"
-  - id: grown
-    route: launch
-    taps: [[201, 437]]
+      en: "Boop the snoot!"
+      ar: "المس الأنف الصغير!"
+  - id: critters
+    route: tab-1             # render: *_2_critters
     caption:
-      en: "Tap to watch it grow"
-      ar: "المس لتراها تنمو"
+      en: "12 squishy friends to unlock"
+      ar: "12 صديقًا لطيفًا بانتظارك"
+  - id: combo
+    route: launch            # mid-combo with the tier banner; capture on device
+    caption:
+      en: "Chain combos. Make them sneeze!"
+      ar: "اصنع كومبو… حتى يعطس!"
+  - id: rush
+    route: tab-2             # render: *_4_rush_play
+    caption:
+      en: "Boop Rush: 30 seconds of snoots"
+      ar: "سباق البوب: ٣٠ ثانية من المرح"
+  - id: calm
+    route: settings          # render: *_6_settings
+    caption:
+      en: "No ads. No purchases. Just boops."
+      ar: "بلا إعلانات. بلا مشتريات. فقط بوب."

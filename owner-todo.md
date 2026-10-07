@@ -25,7 +25,7 @@ knows not to ask again.
 **Do:**
 1. Open https://appstoreconnect.apple.com/apps
 2. + → New App
-3. Platform: iOS · Name: `Boop!` · Primary language: English
+3. Platform: iOS · Name: `Boop! Squishy Snoot Pets` (the store title — see ASO.md; the home-screen name stays `Boop!`) · Primary language: English (U.S.)
 4. Bundle ID: pick `com.ouadieZerhouni.boop` from the dropdown (it appears only after GATE-BUNDLE-ID)
 5. SKU: anything unique, e.g. the bundle id
 6. Create — then copy the numeric **Apple ID** from App Information
@@ -35,4 +35,77 @@ knows not to ask again.
 
 - [ ] GATE-ASC-RECORD cleared
 
-<!-- last updated 2026-10-06 21:54 -->
+
+## GATE-CODEMAGIC — connect the repo and run the first TestFlight build
+
+**Only you can decide:** Codemagic needs the GitHub repo authorised on your account
+
+**Do:**
+1. https://codemagic.io/apps → Add application → GitHub → `OuadieZerhouni/boop`
+2. It finds `codemagic.yaml`; the `testFlight` workflow uses the existing `OUADIE ZERHOUNI` App Store Connect integration
+3. Start a build on `main` (needs GATE-BUNDLE-ID + GATE-ASC-RECORD first)
+
+**Done when:** build 1 is in TestFlight
+
+- [ ] GATE-CODEMAGIC cleared
+
+## GATE-DEVICE-TEST — 10 minutes on a real iPhone
+
+The web preview and 55 automated tests cover logic and layout; only a device covers feel.
+
+**Check:**
+1. Boop the nose 30× fast: sound pitch climbs, haptic ticks, combo banner at 10 and 25, sneeze at 30, Pip unlocks
+2. Silent switch ON → no sound (ambient session); Settings → Sound off → no sound with switch OFF
+3. Hold the critter ~1 s → hug face + sound; drag → squish
+4. Rush: play a full round; sleepy critters (closed eyes, "z") cost points
+5. Settings → Language → العربية: whole UI mirrors; back to System
+6. Kill the app mid-combo, relaunch: boops are kept
+7. Airplane mode launch: everything works
+
+**Done when:** all seven pass on TestFlight build 1
+
+- [ ] GATE-DEVICE-TEST cleared
+
+## GATE-ASA-CHECK — confirm the `boop` token in Apple Search Ads
+
+**Only you can decide:** Search Ads popularity is behind your login
+
+**Do:** Search Ads → Keyword planner (or a paused campaign) → check the 10 keywords in ASO.md "ASA verification list" for US, GB, SA, DE, JP, BR
+
+**Done when:** popularity noted in ASO.md. If `boop` ≤ 2 dots in US, apply the fallback title in ASO.md.
+
+- [ ] GATE-ASA-CHECK cleared
+
+## GATE-STORE-LISTING — paste the listing
+
+**Do:** App Store Connect → the app → each localization (en-US, en-GB, ar-SA, de-DE, es-MX, es-ES, fr-FR, ja, pt-BR):
+name, subtitle, keywords from **ASO.md** (all validated with applyra `check_metadata`), the description, promotional text.
+- Category: Games › Casual, secondary Games › Simulation
+- Age rating questionnaire: all "None" → 4+
+- App Privacy: **Data Not Collected**
+- Privacy Policy URL: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md
+- Support URL: https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md
+- Price: Free · no in-app purchases
+
+**Done when:** every locale shows no red fields
+
+- [ ] GATE-STORE-LISTING cleared
+
+## GATE-SCREENSHOTS — 6.9" set
+
+Raw frames at exactly 1320×2868 are produced on Windows by
+`RENDER_SCREENS=1 flutter test test/tool_render_screens_test.dart` → `build/shots/`
+(en, ar, ja). Emoji and CJK glyphs need the device fonts, so for ja take the frames
+from the simulator or device. Captions and order: `screenshots/screens.yaml`.
+
+**Done when:** 5 frames uploaded for en-US and ar-SA (others may reuse en-US)
+
+- [ ] GATE-SCREENSHOTS cleared
+
+## After launch
+
+- Put the numeric Apple ID in `app.yaml` (`app.app_store_id`), `kAppStoreId` in
+  `lib/ui/settings_screen.dart`, and `updateUrlIos` in app-configs `boop/config.json`
+- Add a "More from us → Boop!" line to OuO (cross-promotion; see ASO.md)
+
+<!-- last updated 2026-10-07 -->

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:boop/core/remote_config.dart';
 import 'package:boop/game/combo.dart';
 import 'package:boop/game/critters.dart';
@@ -293,6 +296,24 @@ void main() {
       expect(c.announcement!.title.resolve('ja'), 'Hi');
       expect(c.announcement!.body.resolve('de'), 'Plain body');
       expect(c.announcement!.url, '', reason: 'only https links are opened');
+    });
+
+    test('the published config (config/remote_config_*.json) matches the code defaults', () {
+      // The live file and the compiled defaults must agree, or a user who has
+      // never fetched sees a different app from one who has.
+      for (final name in ['current', 'template']) {
+        final j = jsonDecode(File('config/remote_config_$name.json').readAsStringSync()) as Map<String, dynamic>;
+        final c = RemoteConfig.fromJson(j);
+        const d = RemoteConfig.defaults;
+        expect(c.rushEnabled, d.rushEnabled, reason: name);
+        expect(c.dailyGoal, d.dailyGoal, reason: name);
+        expect(c.rushDurationSec, d.rushDurationSec, reason: name);
+        expect(c.reviewPromptEnabled, d.reviewPromptEnabled, reason: name);
+        expect(c.reviewAfterUnlocks, d.reviewAfterUnlocks, reason: name);
+        expect(c.privacyUrl, d.privacyUrl, reason: name);
+        expect(c.supportUrl, d.supportUrl, reason: name);
+        expect(c.adsEnabled, isFalse, reason: name);
+      }
     });
 
     test('compareVersions', () {

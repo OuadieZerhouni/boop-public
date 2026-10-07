@@ -430,14 +430,18 @@ class _Banners extends StatelessWidget {
     final p = services.progress.value;
     final ann = cfg.announcement;
     final children = <Widget>[];
-    if (services.remote.updateAvailable && cfg.updateUrlIos.isNotEmpty && !p.dismissedAnnouncements.contains('update-${cfg.latestVersion}')) {
+    // Below minSupportedVersion the banner cannot be dismissed; a merely
+    // newer latestVersion can be dismissed once per version.
+    final required = services.remote.updateRequired;
+    final updateKey = 'update-${cfg.latestVersion}';
+    if (cfg.updateUrlIos.isNotEmpty && (required || (services.remote.updateAvailable && !p.dismissedAnnouncements.contains(updateKey)))) {
       children.add(_banner(
         context,
         title: l.updateAvailable,
         body: '',
         action: l.updateAction,
         onAction: () => launchUrl(Uri.parse(cfg.updateUrlIos), mode: LaunchMode.externalApplication),
-        onDismiss: () => services.progress.dismissAnnouncement('update-${cfg.latestVersion}'),
+        onDismiss: required ? null : () => services.progress.dismissAnnouncement(updateKey),
       ));
     }
     if (ann != null && !p.dismissedAnnouncements.contains(ann.id)) {
@@ -454,7 +458,7 @@ class _Banners extends StatelessWidget {
     return Padding(padding: const EdgeInsets.fromLTRB(16, 8, 16, 0), child: Column(children: children));
   }
 
-  Widget _banner(BuildContext context, {required String title, required String body, String? action, VoidCallback? onAction, required VoidCallback onDismiss}) {
+  Widget _banner(BuildContext context, {required String title, required String body, String? action, VoidCallback? onAction, VoidCallback? onDismiss}) {
     final l = context.l10n;
     return StickerCard(
       color: BoopColors.sky,
@@ -472,7 +476,7 @@ class _Banners extends StatelessWidget {
             ),
           ),
           if (action != null && onAction != null) TextButton(onPressed: onAction, child: Text(action, style: display(context, 15))),
-          IconButton(tooltip: l.dismiss, onPressed: onDismiss, icon: const Icon(Icons.close_rounded, color: BoopColors.ink)),
+          if (onDismiss != null) IconButton(tooltip: l.dismiss, onPressed: onDismiss, icon: const Icon(Icons.close_rounded, color: BoopColors.ink)),
         ],
       ),
     );

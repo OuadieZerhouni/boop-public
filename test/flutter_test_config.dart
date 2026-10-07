@@ -18,5 +18,16 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     if (!File(path).existsSync()) continue;
     await (FontLoader(family)..addFont(bytes(path))).load();
   }
+  // Icons, and (for the screen renders only) an emoji font, so rendered frames
+  // show what a phone shows instead of tofu boxes.
+  final root = Platform.environment['FLUTTER_ROOT'];
+  final icons = root == null ? null : File('$root/bin/cache/artifacts/material_fonts/materialicons-regular.otf');
+  if (icons != null && icons.existsSync()) {
+    await (FontLoader('MaterialIcons')..addFont(bytes(icons.path))).load();
+  }
+  const emoji = r'C:\Windows\Fonts\seguiemj.ttf';
+  if (Platform.environment.containsKey('RENDER_SCREENS') && File(emoji).existsSync()) {
+    await (FontLoader('Segoe UI Emoji')..addFont(bytes(emoji))).load();
+  }
   await testMain();
 }

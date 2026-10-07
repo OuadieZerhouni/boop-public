@@ -36,7 +36,7 @@
   "rushStart": "スタート",
   "rushScore": "スコア",
   "rushBest": "ベスト",
-  "rushTime": "タイム",
+  "rushTime": "のこり{seconds}秒",
   "rushOver": "タイムアップ！",
   "rushNewBest": "ベスト更新！",
   "rushPlayAgain": "もう一回",

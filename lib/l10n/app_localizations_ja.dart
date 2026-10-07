@@ -181,7 +181,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get rushBest => 'ベスト';
 
   @override
-  String get rushTime => 'タイム';
+  String rushTime(int seconds) {
+    return 'のこり$seconds秒';
+  }
 
   @override
   String get rushOver => 'タイムアップ！';

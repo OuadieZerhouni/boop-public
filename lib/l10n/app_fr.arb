@@ -36,7 +36,7 @@
   "rushStart": "Jouer",
   "rushScore": "Score",
   "rushBest": "Record",
-  "rushTime": "Temps",
+  "rushTime": "Temps {seconds} s",
   "rushOver": "Temps écoulé !",
   "rushNewBest": "Nouveau record !",
   "rushPlayAgain": "Rejouer",
