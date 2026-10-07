@@ -89,7 +89,7 @@ name, subtitle, keywords from **ASO.md** (all validated with applyra `check_meta
 
 **Done when:** every locale shows no red fields
 
-- [ ] GATE-STORE-LISTING cleared
+- [x] GATE-STORE-LISTING cleared — 2026-10-07: 9 locales over the API (ASO/listing.yaml), Games › Casual + Simulation, 4+, free, 175 territories, review contact + notes; App Privacy "Data Not Collected" published in Chrome (owner-approved).
 
 ## GATE-SCREENSHOTS — 6.9" set
 
