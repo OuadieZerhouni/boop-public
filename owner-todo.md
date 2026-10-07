@@ -47,7 +47,7 @@ knows not to ask again.
 
 **Done when:** build 1 is in TestFlight
 
-- [ ] GATE-CODEMAGIC cleared
+- [x] GATE-CODEMAGIC cleared — 2026-10-07: not needed; build 1.0.0 (1) built and uploaded from this Mac with `release_local.py ship`.
 
 ## GATE-DEVICE-TEST — 10 minutes on a real iPhone
 
@@ -100,7 +100,7 @@ from the simulator or device. Captions and order: `screenshots/screens.yaml`.
 
 **Done when:** 5 frames uploaded for en-US and ar-SA (others may reuse en-US)
 
-- [ ] GATE-SCREENSHOTS cleared
+- [x] GATE-SCREENSHOTS cleared — 2026-10-07: 5 frames each for en-US and ar-SA (6.9", APP_IPHONE_67) uploaded over the API from the simulator capture; all COMPLETE.
 
 ## After launch
 

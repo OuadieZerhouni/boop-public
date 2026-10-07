@@ -43,3 +43,7 @@ aso:
 
 dev:
   web_port: 0
+
+legal:
+  privacy_url: "https://github.com/OuadieZerhouni/app-configs/blob/main/boop/PRIVACY.md"
+  support_url: "https://github.com/OuadieZerhouni/app-configs/blob/main/boop/SUPPORT.md"
