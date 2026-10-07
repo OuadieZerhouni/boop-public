@@ -28,7 +28,7 @@ class SoundBoard {
   bool _ready = false;
   bool _disabled = false;
 
-  static const boopSteps = 14;
+  static const boopSteps = 19;
 
   Future<void> init() async {
     if (skipDeviceOnlyWork) {

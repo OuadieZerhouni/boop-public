@@ -28,7 +28,7 @@ void main() {
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues(prefs);
-    services = (await tester.runAsync(() => AppServices.create()))!;
+    services = (await tester.runAsync(() => AppServices.create(clock: () => tester.binding.clock.now())))!;
     if (reduceMotion) {
       await tester.runAsync(() => services.settings.update(services.settings.value.copyWith(reduceMotion: true)));
     }
@@ -87,7 +87,7 @@ void main() {
       await tester.pumpAndSettle();
       final p = services.progress.value;
       expect(p.lifetimeBoops, 1);
-      expect(p.todayAt(DateTime.now()), 1);
+      expect(p.todayAt(services.clock()), 1);
       expect(find.text('1 boop'), findsOneWidget);
       expect(find.text('Today 1/50'), findsOneWidget);
     });
@@ -179,6 +179,13 @@ void main() {
       await frames(tester, 620, 50);
       expect(pose(tester, s).face, CritterFace.sleepy);
       expect(pose(tester, s).squashY, 1);
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(tester.binding.hasScheduledFrame, isFalse, reason: 'at rest the stage stops repainting until its next event');
+      final zBefore = tester.getTopLeft(find.descendant(of: s, matching: find.text('z')).first);
+      await frames(tester, 40, 50);
+      expect(tester.getTopLeft(find.descendant(of: s, matching: find.text('z')).first), zBefore, reason: 'static z z z');
+      await frames(tester, 600, 50); // the doze deepens on its own, past 60 s
+      expect(pose(tester, s).face, CritterFace.asleep);
     });
 
     testWidgets('c6: sound and haptics obey Settings; both off = silent and still', (tester) async {
@@ -212,6 +219,18 @@ void main() {
         await tester.pumpAndSettle();
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline), reason: 'tab $tab');
       }
+      // Mid-round: popped-up critters are labelled, sleepy ones say so.
+      await tester.tap(find.byKey(const ValueKey('rush-start')));
+      var sawSleepy = false;
+      for (var i = 0; i < 100 && !sawSleepy; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+        sawSleepy = find.bySemanticsLabel(RegExp("Don't boop")).evaluate().isNotEmpty;
+      }
+      expect(sawSleepy, isTrue);
+      expect(find.bySemanticsLabel(RegExp(r'^\w+$')), findsWidgets, reason: 'an awake critter is announced by name');
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline), reason: 'rush mid-round');
+      await tester.pump(const Duration(seconds: 31));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('tab-0')));
       await tester.pumpAndSettle();
       await tester.tap(find.byTooltip('Settings'));
@@ -240,11 +259,12 @@ void main() {
         await tester.pump(const Duration(milliseconds: 60));
       }
       expect(sounds, isNot(contains('sneeze')));
+      final before = particles(tester).decorativeCount;
       await tester.tapAt(nose(tester));
-      await tester.pump(const Duration(milliseconds: 16));
+      await tester.pump();
       expect(sounds, contains('sneeze'));
       expect(pose(tester).face, CritterFace.surprised);
-      expect(particles(tester).decorativeCount, greaterThanOrEqualTo(30), reason: 'confetti');
+      expect(particles(tester).decorativeCount - before, greaterThanOrEqualTo(30), reason: 'one tap, a burst of confetti');
       await tester.pumpAndSettle();
       await flush(tester);
     });
@@ -362,7 +382,61 @@ void main() {
       final p = services.progress.value;
       expect(p.lifetimeBoops, greaterThanOrEqualTo(35));
       expect(p.isUnlocked(critterById('pip')), isTrue);
-      expect(p.goalMetAt(DateTime.now()), isTrue);
+      expect(p.goalMetAt(services.clock()), isTrue);
+      await flush(tester);
+    });
+  });
+
+  group('F5 — Boop Rush (screen)', () {
+    Future<void> openRush(WidgetTester tester, {Map<String, Object> remote = const {}}) async {
+      await boot(tester, prefs: {ProgressStore.storageKey: jsonEncode(const Progress(onboardingDone: true).toJson())});
+      services.remote.value = RemoteConfig.fromJson(remote);
+      await tester.tap(find.byKey(const ValueKey('tab-2')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('rush-start')));
+      await tester.pump();
+    }
+
+    testWidgets('c1: the round lasts the remote duration', (tester) async {
+      await openRush(tester, remote: {'rush': {'durationSec': 15}});
+      await frames(tester, 145, 100); // 14.5 s
+      expect(find.byKey(const ValueKey('rush-results')), findsNothing);
+      await frames(tester, 8, 100); // 15.3 s
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('rush-results')), findsOneWidget);
+      await flush(tester);
+    });
+
+    testWidgets('c4/c5: the best survives a reload; sleepy taps earn no boops', (tester) async {
+      final handle = tester.ensureSemantics();
+      await openRush(tester);
+      var sleepyTaps = 0;
+      for (var t = 0; t < 31000; t += 50) {
+        for (final f in find.bySemanticsLabel(RegExp("Don't boop")).evaluate().toList()) {
+          await tester.tapAt(tester.getCenter(find.byWidget(f.widget)));
+          sleepyTaps++;
+        }
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+      await tester.pumpAndSettle();
+      expect(sleepyTaps, greaterThan(0));
+      expect(services.progress.value.lifetimeBoops, 0, reason: 'sleepy critters never count as boops');
+
+      await tester.tap(find.byKey(const ValueKey('rush-again')));
+      await tester.pump();
+      for (var t = 0; t < 31000; t += 120) {
+        for (var i = 0; i < 9; i++) {
+          await tester.tap(find.byKey(ValueKey('bush-$i')), warnIfMissed: false);
+        }
+        await tester.pump(const Duration(milliseconds: 120));
+      }
+      await tester.pumpAndSettle();
+      final best = services.progress.value.bestRush;
+      expect(best, greaterThan(0));
+      final reloaded = ProgressStore();
+      await tester.runAsync(reloaded.load);
+      expect(reloaded.value.bestRush, best);
+      handle.dispose();
       await flush(tester);
     });
   });

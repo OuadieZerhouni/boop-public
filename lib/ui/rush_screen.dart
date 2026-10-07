@@ -292,7 +292,8 @@ class _Meadow extends StatelessWidget {
                 child: GestureDetector(
                   key: ValueKey('bush-$i'),
                   behavior: HitTestBehavior.opaque,
-                  onTapDown: (d) => onTap(i, Offset((i % 3) * cell, (i ~/ 3) * cell) + d.localPosition),
+                  // A VoiceOver double-tap has no pointer (kind == null): aim at the bush's middle.
+                  onTapDown: (d) => onTap(i, Offset((i % 3) * cell, (i ~/ 3) * cell) + (d.kind == null ? Offset(cell / 2, cell / 2) : d.localPosition)),
                   child: _Bush(popup: slots[i], now: now),
                 ),
               ),

@@ -19,7 +19,7 @@ void main() {
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     SharedPreferences.setMockInitialValues(prefs);
-    services = (await tester.runAsync(() => AppServices.create()))!;
+    services = (await tester.runAsync(() => AppServices.create(clock: () => tester.binding.clock.now())))!;
     if (locale != null) {
       await tester.runAsync(() => services.settings.update(services.settings.value.copyWith(languageCode: locale.languageCode)));
     }
@@ -81,7 +81,10 @@ void main() {
 
   testWidgets('combo pill and tier banner (F2)', (tester) async {
     await boot(tester);
-    await boop(tester, times: 3);
+    for (var i = 0; i < 3; i++) {
+      await tester.tapAt(nose(tester));
+      await tester.pump(const Duration(milliseconds: 60));
+    }
     expect(find.text('Combo ×3'), findsOneWidget);
     for (var i = 0; i < 7; i++) {
       await tester.tapAt(nose(tester));
@@ -132,7 +135,7 @@ void main() {
     await tester.tapAt(nose(tester));
     await tester.pump(const Duration(milliseconds: 500)); // the toast lives 2 s; look while it is up
     expect(find.text('Daily boops done!'), findsOneWidget);
-    expect(services.progress.value.streakAt(DateTime.now()), 1);
+    expect(services.progress.value.streakAt(services.clock()), 1);
     await flushSnackBars(tester);
   });
 

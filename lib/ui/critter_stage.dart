@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -153,6 +154,7 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
   @override
   void dispose() {
     if (widget.controller?._state == this) widget.controller?._state = null;
+    _wake?.cancel();
     _ticker.dispose();
     super.dispose();
   }
@@ -163,7 +165,12 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
 
   bool get _transient => _blush > 0.01 || _noseFlash > 0.01 || _now < _happyUntil || _now < _surprisedUntil || _pointers.isNotEmpty;
 
+  /// Wakes a stopped ticker for the next blink or doze-off (Reduce motion).
+  Timer? _wake;
+
   void _ensureTicking() {
+    _wake?.cancel();
+    _wake = null;
     if (!_ticker.isActive) {
       _lastTick = Duration.zero;
       _ticker.start();
@@ -189,13 +196,30 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
       _lookX.target = 0;
       _lookY.target = 0;
     }
-    if (!_idleLoop && _springsAtRest && !_transient) {
+    // Without breathing there is nothing to draw between events, so the
+    // ticker sleeps until the next blink or face change instead of repainting.
+    if (!_breathing && _springsAtRest && !_transient && _blinkAmount == 0) {
       for (final s in [_squashX, _squashY, _tilt, _shearX, _shearY, _lookX, _lookY]) {
         s.snap();
       }
       _ticker.stop();
+      if (_idleLoop) _scheduleWake();
     }
     setState(() {});
+  }
+
+  void _scheduleWake() {
+    final next = [
+      if (_faceBase == CritterFace.open) _nextBlink,
+      _lastInput + sleepyAfter,
+      _lastInput + asleepAfter,
+    ].where((t) => t > _now).fold<Duration?>(null, (a, t) => a == null || t < a ? t : a);
+    if (next == null) return;
+    final wait = next - _now;
+    _wake = Timer(wait, () {
+      _now += wait;
+      _ensureTicking();
+    });
   }
 
   // ------------------------------------------------------------------ face
@@ -398,7 +422,8 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
                         child: CustomPaint(painter: CritterPainter(species: widget.species, pose: pose)),
                       ),
                     ),
-                    if (isDozing) _Zzz(at: Offset(g.cx + g.a * 0.7, g.cy - g.b * 1.05), size: _size.shortestSide, t: _now),
+                    if (isDozing)
+                      _Zzz(at: Offset(g.cx + g.a * 0.7, g.cy - g.b * 1.05), size: _size.shortestSide, t: widget.reduceMotion ? Duration.zero : _now),
                   ],
                 ),
               ),

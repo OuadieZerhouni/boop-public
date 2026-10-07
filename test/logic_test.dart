@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:boop/audio/sfx.dart';
 import 'package:boop/core/remote_config.dart';
 import 'package:boop/game/combo.dart';
 import 'package:boop/game/critters.dart';
@@ -25,10 +26,12 @@ void main() {
       expect(looks.length, kCritters.length);
     });
 
-    test('squeak pitches stay inside the rendered range', () {
+    test('every critter has its own squeak pitch, inside the rendered range', () {
+      expect(kCritters.map((c) => c.pitch).toSet().length, kCritters.length);
       for (final c in kCritters) {
-        expect(c.pitch, inInclusiveRange(0, 6));
-        expect(boopPitchIndex(c.pitch, 1000), lessThanOrEqualTo(13));
+        expect(c.pitch, inInclusiveRange(0, 11));
+        expect(boopPitchIndex(c.pitch, 1000), lessThan(SoundBoard.boopSteps));
+        expect(File('assets/sounds/boop_${boopPitchIndex(c.pitch, 1000).toString().padLeft(2, '0')}.wav').existsSync(), isTrue);
       }
     });
 
@@ -161,7 +164,7 @@ void main() {
       expect(boopPitchIndex(3, 4), 4);
       expect(boopPitchIndex(3, 22), 10);
       expect(boopPitchIndex(3, 999), 10);
-      expect(boopPitchIndex(6, 999), 13);
+      expect(boopPitchIndex(11, 999), 18);
     });
   });
 
@@ -170,9 +173,12 @@ void main() {
 
     test('a round ends at the configured duration and ignores later taps', () {
       final g = RushGame(critterIds: ['mochi'], duration: const Duration(seconds: 15), seed: 3);
-      for (var t = 0; t <= 15016; t += 16) {
+      for (var t = 0; t < 15000; t += 1) {
         g.advance(ms * t);
+        expect(g.isOver, isFalse, reason: 'still playing at $t ms');
       }
+      expect(g.tap(0, const Duration(milliseconds: 14999)).kind, isNot(TapKind.ignored));
+      g.advance(const Duration(seconds: 15));
       expect(g.isOver, isTrue);
       expect(g.slots.every((s) => s == null), isTrue);
       expect(g.tap(0, const Duration(seconds: 16)).kind, TapKind.ignored);

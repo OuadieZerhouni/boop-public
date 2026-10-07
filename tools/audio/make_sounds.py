@@ -11,7 +11,7 @@ Design notes
   clicks when the pool restarts a player mid-play.
 - Peak-normalised to -3 dBFS, then each sound is scaled by its own gain so the
   set is balanced by ear (boops are frequent, so they are the quietest).
-- The boop is pre-rendered at 14 semitone steps (boop_00 … boop_13) instead of
+- The boop is pre-rendered at 19 semitone steps (boop_00 … boop_18) instead of
   pitch-shifting at runtime: iOS AVPlayer rate changes preserve pitch, so a
   rate-based pitch would not actually change pitch on the device.
 """
@@ -236,7 +236,7 @@ def hug() -> list[float]:
 def main() -> None:
     print(f"rendering into {OUT}")
     base = 620.0  # boop_00
-    for k in range(14):
+    for k in range(19):  # 12 critter base pitches + 7 combo steps
         write(f"boop_{k:02d}", finish(boop(base * 2 ** (k / 12)), gain=0.55))
     write("giggle", finish(giggle(), gain=0.5))
     write("boing", finish(boing(), gain=0.6))

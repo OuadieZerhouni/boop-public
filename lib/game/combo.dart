@@ -50,5 +50,5 @@ class ComboTracker {
 /// semitone every 3 boops, capped at +7 (the rendered range is 0–13).
 int boopPitchIndex(int base, int count) {
   final rise = ((count - 1) ~/ 3).clamp(0, 7);
-  return (base + rise).clamp(0, 13);
+  return (base + rise).clamp(0, 18);
 }
