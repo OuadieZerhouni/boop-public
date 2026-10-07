@@ -17,7 +17,7 @@ knows not to ask again.
 
 **Done when:** the identifier is listed under Identifiers, and `app-store-connect fetch-signing-files <bundle>` can create a profile for it
 
-- [ ] GATE-BUNDLE-ID cleared
+- [x] GATE-BUNDLE-ID cleared — 2026-10-07 over the API: `asc.py bundle-id register com.ouadieZerhouni.boop "Boop"` (id 53467R5W2L), owner-approved.
 ## GATE-ASC-RECORD — create the App Store Connect record for Boop!
 
 **Only you can decide:** creating an app record is not exposed to API keys until the record exists
