@@ -3,7 +3,7 @@
 # Push: asc.py listing push com.ouadieZerhouni.boop --file ASO/listing.yaml [--dry-run|--yes]
 app: Boop! Squishy Snoot Pets
 bundle_id: com.ouadieZerhouni.boop
-version: '1.0'
+version: '1.0.0'
 version_state: PREPARE_FOR_SUBMISSION
 locales:
   en-US:
