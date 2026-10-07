@@ -222,7 +222,8 @@ void main() {
       // Mid-round: popped-up critters are labelled, sleepy ones say so.
       await tester.tap(find.byKey(const ValueKey('rush-start')));
       var sawSleepy = false;
-      for (var i = 0; i < 100 && !sawSleepy; i++) {
+      // Sleepy critters only appear after 3 s, ~1 in 5 spawns: allow the whole round.
+      for (var i = 0; i < 290 && !sawSleepy; i++) {
         await tester.pump(const Duration(milliseconds: 100));
         sawSleepy = find.bySemanticsLabel(RegExp("Don't boop")).evaluate().isNotEmpty;
       }

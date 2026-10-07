@@ -59,6 +59,10 @@ class DebugFlags {
 
   static bool get hasFakeInput => fakeInput.isNotEmpty;
 
+  /// A store-screenshot scene (see core/screenshot_scene.dart): seeds played-in
+  /// progress and opens that screen. Empty = the real app.
+  static const String screen = String.fromEnvironment('DEBUG_SCREEN');
+
   /// One line for the inspector overlay and for bug reports.
   static String get summary {
     final on = <String>[
@@ -67,6 +71,7 @@ class DebugFlags {
       if (resetFirstRun) 'resetFirstRun',
       if (showInspector) 'inspector',
       if (hasFakeInput) 'fakeInput="$fakeInput"',
+      if (screen.isNotEmpty) 'screen=$screen',
     ];
     return on.isEmpty ? 'no debug flags' : on.join(' · ');
   }

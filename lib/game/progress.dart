@@ -278,6 +278,9 @@ class ProgressStore extends ChangeNotifier {
 
   void markReviewAsked() => _set(_value.copyWith(reviewAsked: true));
 
+  /// Replaces everything at once (screenshot scenes only).
+  void debugReplace(Progress p) => _set(p);
+
   void dismissAnnouncement(String id) =>
       _set(_value.copyWith(dismissedAnnouncements: {..._value.dismissedAnnouncements, id}));
 

@@ -37,6 +37,7 @@ class CritterStageController {
   _CritterStageState? _state;
 
   void sneeze() => _state?._sneeze();
+  void boop() => _state?._boopAnim();
   void celebrate() => _state?._celebrate();
 }
 

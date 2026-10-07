@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../audio/sfx.dart';
 import '../core/app_services.dart';
+import '../core/screenshot_scene.dart';
 import '../game/critters.dart';
 import '../l10n/l10n.dart';
 import 'boop_screen.dart';
@@ -26,7 +27,11 @@ class HomeShell extends StatefulWidget {
 }
 
 class _HomeShellState extends State<HomeShell> {
-  int _tab = 0;
+  int _tab = switch (debugScene) {
+    Scene.critters => 1,
+    Scene.rush => 2,
+    _ => 0,
+  };
   StreamSubscription<BoopEvent>? _sub;
   final List<CritterSpecies> _queue = [];
   bool _showing = false;
@@ -40,6 +45,7 @@ class _HomeShellState extends State<HomeShell> {
       // Anything unlocked but never celebrated (e.g. the app was closed first).
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
+        if (debugScene == Scene.settings) _openSettings();
         _queue.addAll(s.progress.value.pendingCelebrations.where((c) => !_queue.contains(c)));
         _drain();
       });

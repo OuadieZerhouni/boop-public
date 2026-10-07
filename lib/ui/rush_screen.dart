@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../audio/sfx.dart';
 import '../core/app_services.dart';
+import '../core/screenshot_scene.dart';
 import '../game/critters.dart';
 import '../game/rush.dart';
 import '../l10n/l10n.dart';
@@ -43,6 +44,19 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     _ticker = createTicker(_onTick); // eager: a lazy ticker first touched in dispose throws
+    if (debugScene == Scene.rush) WidgetsBinding.instance.addPostFrameCallback((_) => mounted ? _start() : null);
+  }
+
+  /// Screenshot scene: boops each awake critter once it is fully up.
+  void _botTap(RushGame g) {
+    final box = _gridKey.currentContext?.findRenderObject() as RenderBox?;
+    if (box == null) return;
+    final cell = box.size.width / 3;
+    for (var i = 0; i < 9; i++) {
+      final p = g.slots[i];
+      if (p == null || p.kind == PopKind.sleepy || _elapsed - p.bornAt < const Duration(milliseconds: 450)) continue;
+      _tap(i, Offset((i % 3 + 0.5) * cell, (i ~/ 3 + 0.35) * cell));
+    }
   }
 
   @override
@@ -79,6 +93,7 @@ class _RushScreenState extends State<RushScreen> with SingleTickerProviderStateM
     if (g == null) return;
     _elapsed = elapsed;
     g.advance(elapsed);
+    if (debugScene == Scene.rush) _botTap(g);
     final left = g.remaining.inSeconds;
     if (!g.isOver && left < 3 && left != _lastTickSecond && g.remaining.inMilliseconds % 1000 > 0) {
       _lastTickSecond = left;

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../audio/sfx.dart';
 import '../core/app_services.dart';
+import '../core/screenshot_scene.dart';
 import '../core/test_env.dart';
 import '../game/combo.dart';
 import '../game/critters.dart';
@@ -39,6 +41,22 @@ class _BoopScreenState extends State<BoopScreen> with TickerProviderStateMixin {
     // Eager, never lazy: a controller first touched in dispose() throws.
     _banner = AnimationController(vsync: this, duration: const Duration(milliseconds: 1400));
     _comboPulse = AnimationController(vsync: this, duration: const Duration(milliseconds: 220));
+    if (debugScene == Scene.combo) _playComboScene();
+  }
+
+  /// Screenshot scene: 25 quick boops land as the capture fires (~4 s after
+  /// launch), so the "Snoot storm!" banner and the combo pill are both up.
+  double _side = 0;
+  void _playComboScene() {
+    var n = 0;
+    Timer(const Duration(milliseconds: 2300), () {
+      Timer.periodic(const Duration(milliseconds: 60), (t) {
+        if (!mounted || n++ >= 25 || _side == 0) return t.cancel();
+        final c = _s.progress.value.selected;
+        _stage.boop();
+        _onBoop(c, CritterGeometry(_side, c).nose);
+      });
+    });
   }
 
   @override
@@ -136,6 +154,7 @@ class _BoopScreenState extends State<BoopScreen> with TickerProviderStateMixin {
                 child: LayoutBuilder(
                   builder: (context, box) {
                     final side = math.min(box.maxWidth, box.maxHeight).clamp(0.0, 420.0);
+                    _side = side;
                     return Center(
                       child: SizedBox.square(
                         dimension: side,

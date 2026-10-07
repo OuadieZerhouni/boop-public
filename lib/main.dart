@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/app_services.dart';
 import 'core/debug_flags.dart';
+import 'core/screenshot_scene.dart';
 import 'core/settings.dart';
 import 'l10n/app_localizations.dart';
 import 'ui/home_shell.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final services = await AppServices.create();
   if (DebugFlags.resetFirstRun) await services.resetProgress();
+  if (debugScene != null) services.progress.debugReplace(playedProgress(DateTime.now()));
   runApp(BoopApp(services: services));
 }
 

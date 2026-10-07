@@ -2,6 +2,8 @@
 # Raw frames (1320x2868) can also be rendered on Windows:
 #   RENDER_SCREENS=1 flutter test test/tool_render_screens_test.dart  -> build/shots/
 # Rule from ASO.md: slide 1's caption contains the word "Boop".
+# Each slide's state comes from DEBUG_SCREEN (lib/core/screenshot_scene.dart);
+# `route` is documentation only — capture relaunches, it does not navigate.
 
 sizes:
   "6.9": [2868, 1320]
@@ -13,26 +15,31 @@ status_bar: {time: "9:41", battery: 100, cellular: 4, wifi: 3}
 
 slides:
   - id: boop
+    defines: {DEBUG_SCREEN: boop}
     route: launch            # played state: 640 boops, Bao selected (render: *_1_boop)
     caption:
       en: "Boop the snoot!"
       ar: "المس الأنف الصغير!"
   - id: critters
+    defines: {DEBUG_SCREEN: critters}
     route: tab-1             # render: *_2_critters
     caption:
       en: "12 squishy friends to unlock"
       ar: "12 صديقًا لطيفًا بانتظارك"
   - id: combo
+    defines: {DEBUG_SCREEN: combo}
     route: launch            # mid-combo with the tier banner; capture on device
     caption:
       en: "Chain combos. Make them sneeze!"
       ar: "اصنع كومبو… حتى يعطس!"
   - id: rush
+    defines: {DEBUG_SCREEN: rush}
     route: tab-2             # render: *_4_rush_play
     caption:
       en: "Boop Rush: 30 seconds of snoots"
       ar: "سباق البوب: ٣٠ ثانية من المرح"
   - id: calm
+    defines: {DEBUG_SCREEN: settings}
     route: settings          # render: *_6_settings
     caption:
       en: "No ads. No purchases. Just boops."
