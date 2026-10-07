@@ -9,6 +9,7 @@ import '../game/critters.dart';
 import '../game/rush.dart';
 import '../l10n/l10n.dart';
 import 'critter_painter.dart';
+import 'names.dart';
 import 'particles.dart';
 import 'theme.dart';
 import 'widgets.dart';
@@ -282,15 +283,34 @@ class _Meadow extends StatelessWidget {
             top: (i ~/ 3) * cell,
             width: cell,
             height: cell,
-            child: GestureDetector(
-              key: ValueKey('bush-$i'),
-              behavior: HitTestBehavior.opaque,
-              onTapDown: (d) => onTap(i, Offset((i % 3) * cell, (i ~/ 3) * cell) + d.localPosition),
-              child: _Bush(popup: slots[i], now: now),
+            // An empty bush is nothing to boop, so VoiceOver skips it.
+            child: ExcludeSemantics(
+              excluding: slots[i] == null,
+              child: Semantics(
+                label: _label(context, slots[i]),
+                button: true,
+                child: GestureDetector(
+                  key: ValueKey('bush-$i'),
+                  behavior: HitTestBehavior.opaque,
+                  onTapDown: (d) => onTap(i, Offset((i % 3) * cell, (i ~/ 3) * cell) + d.localPosition),
+                  child: _Bush(popup: slots[i], now: now),
+                ),
+              ),
             ),
           ),
       ],
     );
+  }
+
+  static String? _label(BuildContext context, Popup? p) {
+    if (p == null) return null;
+    final l = context.l10n;
+    final name = critterName(l, critterById(p.critterId));
+    return switch (p.kind) {
+      PopKind.awake => name,
+      PopKind.sleepy => '$name. ${l.rushRuleSleepy}',
+      PopKind.golden => '$name. ${l.rushRuleGolden}',
+    };
   }
 }
 
@@ -340,8 +360,7 @@ class _Bush extends StatelessWidget {
                         width: w * 0.84,
                         height: w * 0.84,
                         top: w * 0.74 - rise * w * 0.9, // fully up: the whole face clears the bush
-                        child: Semantics(
-                          label: p.kind.name,
+                        child: ExcludeSemantics(
                           child: CustomPaint(
                             painter: CritterPainter(
                               species: critterById(p.critterId),

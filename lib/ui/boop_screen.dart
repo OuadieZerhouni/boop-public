@@ -168,6 +168,7 @@ class _BoopScreenState extends State<BoopScreen> with TickerProviderStateMixin {
                                   s.sound.medium();
                                   _particles.hearts(at, count: 6, scale: 1.2);
                                 },
+                                onHugging: (at) => _particles.hearts(at, count: 2, scale: 1.1),
                                 onRelease: () => s.sound.play(Sfx.boing, volume: 0.7),
                               ),
                             ),

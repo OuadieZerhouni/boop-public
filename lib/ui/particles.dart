@@ -48,6 +48,10 @@ class ParticleController {
 
   bool get isEmpty => _items.isEmpty;
 
+  /// Live hearts, sparkles and confetti (floating text excluded).
+  @visibleForTesting
+  int get decorativeCount => _items.where((p) => p.kind != _Kind.text).length;
+
   void hearts(Offset at, {int count = 3, double scale = 1}) {
     if (muted) return;
     for (var i = 0; i < count; i++) {

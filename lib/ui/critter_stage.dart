@@ -49,7 +49,9 @@ class CritterStage extends StatefulWidget {
     required this.onBoop,
     this.onBodyTap,
     this.onHugStart,
+    this.onHugging,
     this.onRelease,
+    this.idle,
     this.reduceMotion = false,
     this.controller,
     this.semanticLabel,
@@ -61,6 +63,12 @@ class CritterStage extends StatefulWidget {
   final void Function(Offset local) onBoop;
   final void Function(Offset local)? onBodyTap;
   final void Function(Offset local)? onHugStart;
+
+  /// Repeats every [_CritterStageState.hugHeartEvery] while a hug is held.
+  final void Function(Offset local)? onHugging;
+
+  /// Blinking and dozing off. null = on a device, off under `flutter test`.
+  final bool? idle;
 
   /// The finger left after a drag (for a "boing").
   final VoidCallback? onRelease;
@@ -80,6 +88,7 @@ class _PointerInfo {
   bool onNose = false;
   bool dragging = false;
   bool hugging = false;
+  Duration lastHugBeat = Duration.zero;
 }
 
 class _CritterStageState extends State<CritterStage> with SingleTickerProviderStateMixin {
@@ -105,13 +114,16 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
   double _noseFlash = 0;
   Size _size = Size.zero;
 
-  /// Breathing, blinking and dozing off run forever on a device. Under
-  /// `flutter test` they are off so springs can settle (pumpAndSettle).
-  bool get _idleLoop => !skipDeviceOnlyWork && !widget.reduceMotion;
+  /// Blinking and dozing off run forever on a device. Under `flutter test`
+  /// they are off so springs can settle (pumpAndSettle). Breathing is motion,
+  /// so Reduce motion stops it; the faces stay.
+  bool get _idleLoop => widget.idle ?? !skipDeviceOnlyWork;
+  bool get _breathing => _idleLoop && !widget.reduceMotion;
 
   static const sleepyAfter = Duration(seconds: 30);
   static const asleepAfter = Duration(seconds: 60);
   static const hugAfter = Duration(milliseconds: 600);
+  static const hugHeartEvery = Duration(milliseconds: 350);
   static const dragSlop = 10.0;
 
   @override
@@ -210,7 +222,7 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
 
   CritterPose _pose() {
     var sx = _squashX.value, sy = _squashY.value;
-    if (_idleLoop) {
+    if (_breathing) {
       final breath = math.sin(_now.inMilliseconds / 1000 * (isDozing ? 1.6 : 2.6));
       sy *= 1 + breath * (isDozing ? 0.022 : 0.014);
       sx *= 1 - breath * 0.006;
@@ -312,8 +324,12 @@ class _CritterStageState extends State<CritterStage> with SingleTickerProviderSt
     for (final i in _pointers.values) {
       if (!i.onNose && !i.dragging && !i.hugging && _now - i.time >= hugAfter) {
         i.hugging = true;
+        i.lastHugBeat = _now;
         _blush = 1;
         widget.onHugStart?.call(i.last);
+      } else if (i.hugging && _now - i.lastHugBeat >= hugHeartEvery) {
+        i.lastHugBeat = _now;
+        widget.onHugging?.call(i.last);
       }
     }
   }

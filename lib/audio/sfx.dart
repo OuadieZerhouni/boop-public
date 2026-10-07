@@ -62,8 +62,14 @@ class SoundBoard {
 
   static String _boopName(int i) => 'boop_${i.clamp(0, boopSteps - 1).toString().padLeft(2, '0')}';
 
+  /// Sees every sound that passed the Settings check, before the audio route.
+  @visibleForTesting
+  void Function(String name)? debugOnPlay;
+
   void _play(String name, {double volume = 1}) {
-    if (_disabled || !_ready || !settings.value.sound) return;
+    if (!settings.value.sound) return;
+    debugOnPlay?.call(name);
+    if (_disabled || !_ready) return;
     final pool = _pools[name];
     if (pool == null) return;
     unawaited(pool.start(volume: volume).then((_) {}, onError: (Object e) => debugPrint('sfx $name: $e')));
