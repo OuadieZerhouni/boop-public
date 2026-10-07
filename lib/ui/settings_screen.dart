@@ -191,7 +191,7 @@ class SettingsScreen extends StatelessWidget {
 
 /// The numeric App Store id, once GATE-ASC-RECORD is cleared. Empty until then
 /// ("Rate" falls back to the in-app review sheet's own lookup).
-const kAppStoreId = '';
+const kAppStoreId = '6820154498';
 
 class _Divider extends StatelessWidget {
   const _Divider();

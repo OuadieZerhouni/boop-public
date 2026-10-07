@@ -33,7 +33,7 @@ knows not to ask again.
 
 **Done when:** the app appears in App Store Connect and its Apple ID is in app.yaml
 
-- [ ] GATE-ASC-RECORD cleared
+- [x] GATE-ASC-RECORD cleared — 2026-10-07 in Chrome (owner-approved): "Boop! Squishy Snoot Pets", en-US, SKU com.ouadieZerhouni.boop, Apple ID 6820154498.
 
 
 ## GATE-CODEMAGIC — connect the repo and run the first TestFlight build

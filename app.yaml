@@ -6,7 +6,7 @@ app:
   display_name: "Boop!"
   slug: boop
   bundle_id: com.ouadieZerhouni.boop
-  app_store_id: ""
+  app_store_id: "6820154498"
 
 features:
   widget: false
