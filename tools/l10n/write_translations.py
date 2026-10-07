@@ -68,7 +68,7 @@ T["ar"] = {
     "updateAvailable": "إصدار جديد من Boop! جاهز.", "updateAction": "تحديث", "dismiss": "إغلاق",
     "critterMochi": "موتشي", "critterPip": "بيب", "critterBao": "باو", "critterKiwi": "كيوي",
     "critterMomo": "مومو", "critterPuff": "باف", "critterNori": "نوري", "critterTaro": "تارو",
-    "critterCoco": "كوكو", "critterJelly": "جيلي", "critterSprout": "برعوم", "critterStar": "نجوم",
+    "critterCoco": "كوكو", "critterJelly": "جيلي", "critterSprout": "برعوم", "critterStar": "نجمة",
     "kindMochi": "أرنب", "kindPip": "كتكوت", "kindBao": "باندا", "kindKiwi": "ضفدع",
     "kindMomo": "فرس نهر صغير", "kindPuff": "خروف الغيمة", "kindNori": "فقمة", "kindTaro": "هامستر",
     "kindCoco": "جرو", "kindJelly": "قنديل بحر", "kindSprout": "جنّية الورقة", "kindStar": "تنين صغير",

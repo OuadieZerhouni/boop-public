@@ -341,7 +341,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get critterSprout => 'برعوم';
 
   @override
-  String get critterStar => 'نجوم';
+  String get critterStar => 'نجمة';
 
   @override
   String get kindMochi => 'أرنب';
